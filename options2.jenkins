@@ -1,7 +1,7 @@
 pipeline {
     agent any
     options {
-         overrideIndexTriggers()
+          githubProjectProperty()
     }
     stages {
         stage("Test1") {
