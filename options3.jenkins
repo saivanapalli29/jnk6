@@ -1,9 +1,5 @@
 pipeline {
-    agent {
-        docker {
-            image "alpine:latest"
-        }
-    }
+    agent any
     options {
         buildDiscarder logRotator(artifactDaysToKeepStr: "30", artifactNumToKeepStr: "100", daysToKeepStr: "60", numToKeepStr: "200")
         checkoutToSubdirectory("mycheckout")
