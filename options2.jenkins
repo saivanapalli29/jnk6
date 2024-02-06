@@ -1,7 +1,7 @@
 pipeline {
     agent any
     options {
-          githubProjectProperty()
+          githubProjectProperty(artifactDaysToKeepStr: "30")
     }
     stages {
         stage("Test1") {
