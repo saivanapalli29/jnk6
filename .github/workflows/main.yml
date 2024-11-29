@@ -39,7 +39,7 @@ jobs:
             sudo apt update -y || true
             sudo git pull origin master
             sudo apt install docker.io* -y || true
-            sudo docker stop my-nodjs-app || true
+            sudo docker stop my-nodejs-app || true
             sudo docker rm my-nodejs-app || true
             sudo docker run -d --name my-nodejs-app -p 80:80 saivanapalli29/ninesoftech
           "
