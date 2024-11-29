@@ -32,29 +32,16 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
 
-      # Step 3: SSH into EC2 and create the target directory
-      - name: SSH into EC2 and create target directory 🚀
-        run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }} "
-            mkdir -p /home/ubuntu/taoshi-be/
-          "
-
-      # Step 4: Copy files to remote server
-      - name: Copy files to remote server 🚙
-        run: |
-          scp -r * ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }}:/home/ubuntu/taoshi-be/
-
       # Step 5: SSH into EC2 instance, pull latestS code, and deploy Docker container
       - name: SSH into EC2 and deploy Docker container 🚀
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }} "
-            cd /home/ubuntu/taoshi-be/
             sudo apt update -y || true
             sudo git pull origin master
             sudo apt install docker.io* -y || true
             sudo docker stop my-nodjs-app || true
             sudo docker rm my-nodejs-app || true
-            sudo docker run -d --name my-nodejs-app -p 5000:5000 saivanapalli29/ninesoftech
+            sudo docker run -d --name my-nodejs-app -p 80:80 saivanapalli29/ninesoftech
           "
 
       # Step 6: Clean up SSH key
